@@ -1,0 +1,8 @@
+.bg-image {
+    background-image: url("../../assets/home/meme.jpg");
+    background-color: #cccccc;
+    height: 97vh;
+    border: 5px solid #cccccc;
+    border-radius: 12px;
+    justify-content: end;
+}

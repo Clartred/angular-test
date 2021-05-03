@@ -1,0 +1,27 @@
+<div class="flex-center-text-container bg-image">
+    
+    <div class="question-text-container flex">
+        {{questions[currentQuestion].questionText}}
+    </div>
+
+    <div class="answers-container flex direction-column space-around">
+
+        <div class="flex space-around">
+            <div (click)="answer(1)" class="answer-bg-image answer-text" id="answer-1">
+                {{questions[currentQuestion].answer1}}
+            </div>
+            <div (click)="answer(2)" class="answer-bg-image answer-text" id="answer-2">
+                {{questions[currentQuestion].answer2}}
+            </div>
+        </div>
+        <div class="flex space-around">
+            <div (click)="answer(3)" class="answer-bg-image answer-text" id="answer-3">
+                {{questions[currentQuestion].answer3}}
+            </div>
+            <div (click)="answer(4)" class="answer-bg-image answer-text" id="answer-4">
+                {{questions[currentQuestion].answer4}}
+            </div>
+        </div>
+
+    </div>
+</div>
