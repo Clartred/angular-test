@@ -9,6 +9,8 @@ import { HomeMissclickComponent } from './home-missclick/home-missclick.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { YouDiedComponent } from './game1/you-died/you-died.component';
+import { Game2Component } from './game2/game2.component';
+import { CardComponent } from './game2/card/card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { YouDiedComponent } from './game1/you-died/you-died.component';
     Game1Component,
     HomeComponent,
     HomeMissclickComponent,
-    YouDiedComponent
+    YouDiedComponent,
+    Game2Component,
+    CardComponent
   ],
   imports: [
     BrowserModule,

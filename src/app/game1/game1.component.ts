@@ -54,9 +54,12 @@ export class Game1Component implements OnInit {
 
   toTheNextQuestion() {
     setTimeout(() => {
+      if(this.currentQuestion+1 === this.questions.length){
+        this.router.navigate(['dfhsjktdyjshgdzghftfd;;3']);
+      }
       this.currentQuestion++;
       this.resetBorders();
-    }, 2000)
+    }, 1500)
   }
 
   resetBorders() {
