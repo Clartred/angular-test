@@ -1,1 +1,7 @@
-<img (click)="clicked()" [src]="url" class="card">
+<ng-container *ngIf="card.isShown">
+    <img (click)="clicked()" [src]="card.pictureUrl" class="card">
+</ng-container>
+
+<ng-container *ngIf="!card.isShown">
+    <img (click)="clicked()" [src]="card.altUrl" class="card">
+</ng-container>

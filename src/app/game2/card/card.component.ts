@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PlayCard } from '../../model/play-card';
 
 @Component({
   selector: 'app-card',
@@ -7,16 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  @Input() value: number;
-  @Input() url: string;
+  @Input() card: PlayCard;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  clicked(){
-    console.log('value: ', this.value);
+  clicked() {
+    this.card.isShown = !this.card.isShown;
   }
 
 }

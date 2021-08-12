@@ -9,26 +9,151 @@ import { PlayCard } from '../model/play-card';
 export class Game2Component implements OnInit {
 
   cards: PlayCard[] = [];
+
   playerClosedCards: PlayCard[] = [];
   babuskaClosedCards: PlayCard[] = [];
   playerOpenCards: PlayCard[] = [];
   babuskaOpenCards: PlayCard[] = [];
   middleCards: PlayCard[] = [];
-  grayCardUrl = "../../../assets/game2/cards/Gray_back.jpg";
-  redCardUrl = "../../../assets/game2/cards/Red_back.jpg";
-  closedCardValue = 0;
+
+  playerClosedCard: PlayCard;
+  placeHolderCard: PlayCard;
+  //grayCardUrl = "../../../assets/game2/cards/Gray_back.jpg";
+  //redCardUrl = "../../../assets/game2/cards/Red_back.jpg";
+
+
+  //middleClosedCardUrl = '../../../assets/game2/cards/Yellow_back.jpg';
+  //middleClosedCardValue = 0;
+
+  playedClosedCardIsClicked = false;
+  playedOpenedCardIsClicked = false;
+  babuskaOpenedCardIsClicked = false;
+  middleCardIsClicked = false;
+
+  playerTurnIsOn = true;
+
+  clickedCardIndex: number;
 
   constructor() { }
 
+  //set closed c
+  //set cards as template if there are no open or middle cards.
+  //calculate only good turn and check if that's what player did.
+  //how to calculate that?
+  //well, for player - check open card and see if it should go into middle cards.
+  //if not, check if it should go into oponent open cards.
+  //if not, then it should go into your open cards.
+
   ngOnInit(): void {
     document.body.style.background = "#cccccc";
+    this.setPlaceHolderCardValue();
     this.initCards();
     this.splitCardsIntoTwoDecks(this.cards);
+    this.startGame();
+
+    for (let i = 0; i < this.babuskaClosedCards.length; i++) {
+      console.log(this.babuskaClosedCards[i]);
+    }
+  }
+
+  startGame() {
+    /* while(true){
+      this.playerTurn();
+      this.babuskaTurn();
+    } */
+  }
+
+  playerTurn() {
+
+  }
+
+  babuskaTurn() {
+
+  }
+
+  cardIsClicked(target,  ) {
+    if (this.playerTurnIsOn) {
+      //this.playerFinishedTurn();
+      if (target === 'babuska-open-cards') {
+        console.log('babuska-open-cards');
+      } else if (target === 'player-open-cards') {
+        console.log('player-open-cards');
+      } else if (target === 'player-closed-cards') {
+        this.playerClosedCardClick();
+      } else if (target === 'middle-cards') {
+        this.middleCardClick();
+      }
+    }
+    /*  playedClosedCardIsClicked = false;
+  playedOpenedCardIsClicked = false;
+  babuskaOpenedCardIsClicked = false;
+  middleCardIsClicked = false; */
+  }
+
+  playerFinishedTurn() {
+    this.playerTurnIsOn = !this.playerTurnIsOn;
   }
 
   playerClosedCardClick() {
+    // this.playerOpenCards.push(this.playerClosedCards[0]);
+    //this.playerClosedCards.shift();
+    console.log(this.playedClosedCardIsClicked)
+    if (this.playedClosedCardIsClicked) {
+      alert('Click on some other card now for god sake!');
+      return;
+    }
+    this.openPlayedClosedCard();
+  }
+
+  middleCardClick() {
+    if (this.playedClosedCardIsClicked) {
+      //this.closedCardValue;
+
+      /*   if (this.middleCards.length === 0 && this.closedCardValue === 1) {
+          // this.playerOpenCards.push(this.playerClosedCards[0]);
+          //this.playerClosedCards.shift();
+          this.removeCardFromDeck(this.playerClosedCards);
+        } else {
+  
+        } */
+    } else if (this.playedOpenedCardIsClicked) {
+
+    }
+  }
+
+  pushCardToDeck(card, deck1, deck2) {
+
+  }
+
+  removeCardFromDeck(deck) {
+    deck.shift();
+  }
+
+  openPlayedClosedCard() {
+    this.setBorderColor('player-closed-card', 'black');
+    //set value of next card onto closed red card
+    //this.closedCardValue = this.playerClosedCards[this.playerClosedCards.length - 1].value;
+    //set red card as clicked
+    this.playedClosedCardIsClicked = !this.playedClosedCardIsClicked;
+  }
+
+  playerOpenedCardClick() {
     this.playerOpenCards.push(this.playerClosedCards[0]);
     this.playerClosedCards.shift();
+    if (!this.playedClosedCardIsClicked && !this.playedOpenedCardIsClicked) {
+      alert("First click on your closed or open card!");
+      return;
+    }
+    let selectedCard;
+    if (this.playedClosedCardIsClicked) {
+      // selectedCard = this.closedCardValue;
+    } else if (this.playedOpenedCardIsClicked) {
+      //selectedCard = this.closedCardValue;
+    }
+    this.setBorderColor('player-closed-card', 'black');
+    // this.closedCardValue = this.playerClosedCards[0].value;
+    //treba da dobije neki border, da se vidi da je selektovana.
+    //treba da se okrene, da se vidi vrednost.
   }
 
   babuskaClosedCardClick() {
@@ -45,7 +170,10 @@ export class Game2Component implements OnInit {
           continue;
         }
         let url = '../../../assets/game2/cards/' + j + signs[i] + '.jpg';
-        this.cards.push(new PlayCard(j, url));
+        this.cards.push(
+          new PlayCard(
+            j + signs[i], j, url, '../../../assets/game2/cards/Yellow_back.jpg'
+          ));
       }
     }
   }
@@ -78,6 +206,20 @@ export class Game2Component implements OnInit {
     }
 
     return array;
+  }
+
+  setBorderColor(id, color) {
+    document.getElementById(id).style.border = "5px solid " + color;
+    document.getElementById(id).style.borderRadius = "12px";
+  }
+
+  setPlaceHolderCardValue(){
+    this.placeHolderCard =  new PlayCard(
+      "null",
+      0,
+      '../../../assets/game2/cards/Red_back.jpg',
+      '../../../assets/game2/cards/Red_back.jpg'
+    )
   }
 
 }

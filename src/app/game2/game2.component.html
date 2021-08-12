@@ -1,4 +1,5 @@
 <div class="flex-center-text-container">
+    <!-- Players picture container -->
     <div class="players-pictures-container">
         <div style="text-align: center;">
             <img class="player-pictures" src="../../../assets/game2/babuska2.jpg">
@@ -9,36 +10,46 @@
             <label>You!</label>
         </div>
     </div>
+
+    <!------------------------------------------------------------------------->
     <div class="cards-container">
-        <div class="babuska-closed-cards" (click)="babuskaClosedCardClick()">
-            <app-card [value]="closedCardValue" [url]="grayCardUrl">
-            </app-card>
+        <!-- babuska closed cards -->
+        <div class="babuska-closed-cards" (click)="cardIsClicked('babuska-closed-cards', babuskaClosedCards[babuskaClosedCards.length-1].id)">
+            <app-card [card]="babuskaClosedCards[0]"></app-card>
         </div>
-        <div class="babuska-open-cards">
+        <!-- babuska opened cards -->
+        <div class="babuska-open-cards" (click)="cardIsClicked('babuska-open-cards', babuskaOpenCards[babuskaOpenCards.length-1].id)">
             <ng-container *ngIf="babuskaOpenCards.length > 0">
-                <app-card [value]="babuskaOpenCards[25-babuskaClosedCards.length].value"
-                    [url]="babuskaOpenCards[25-babuskaClosedCards.length].pictureUrl">
-                </app-card>
+                <app-card [card]="babuskaOpenCards[babuskaOpenCards.length-1]"></app-card>
+            </ng-container>
+            <ng-container *ngIf="babuskaOpenCards.length === 0">
+                <app-card [card]="placeHolderCard"></app-card>
             </ng-container>
         </div>
-        <div class="player-open-cards">
+        <!-- player opened cards -->
+        <div class="player-open-cards" (click)="cardIsClicked('player-open-cards', playerOpenCards[playerOpenCards.length-1].id)">
             <ng-container *ngIf="playerOpenCards.length > 0">
-                <app-card [value]="playerOpenCards[25-playerClosedCards.length].value"
-                    [url]="playerOpenCards[25-playerClosedCards.length].pictureUrl">
-                </app-card>
+                <app-card [card]="playerOpenCards[playerOpenCards.length-1]"></app-card>
+            </ng-container>
+            <ng-container *ngIf="playerOpenCards.length === 0">
+                <app-card [card]="placeHolderCard"></app-card>
             </ng-container>
         </div>
-        <div class="player-closed-cards" (click)="playerClosedCardClick()">
-            <app-card [value]="closedCardValue" [url]="redCardUrl">
-            </app-card>
+
+        <!-- player closed cards -->
+        <div class="player-closed-cards" (click)="cardIsClicked('player-closed-cards', playerClosedCards[0].id)" id="player-closed-card">
+            <app-card [card]="playerClosedCards[0]"></app-card>
         </div>
     </div>
+
+    <!-- middle cards container -->
     <div class="middle-cards-container">
-        <div class="middle-cards">
-            <app-card [value]="playerClosedCards[0].value" [url]="playerClosedCards[0].pictureUrl"></app-card>
+        <div class="middle-cards" (click)="cardIsClicked('middle-cards', middleCards[middleCards.length-1].id)">
             <ng-container *ngIf="middleCards.length > 0">
-                <app-card [value]="middleCards[0].value" [url]="middleCards[0].pictureUrl">
-                </app-card>
+                <app-card [card]="middleCards[middleCards.length-1]"></app-card>
+            </ng-container>
+            <ng-container *ngIf="middleCards.length === 0">
+                <app-card [card]="placeHolderCard"></app-card>
             </ng-container>
         </div>
     </div>
